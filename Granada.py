@@ -16,7 +16,7 @@ def app():
     st.markdown('La provincia cordobesa se trata, según los datos proporcionados por la Junta de Andalucía, de la cuarta más damnificada por el coronavirus en Andalucía. \
         Únicamente superada por Sevilla, Málaga y Granada. Resulta curioso la escasez de datos y la baja incidencia en verano, siendo una de las provincias menos afectadas esos meses. Esto puede ser debido a las altas temperaturas alcanzadas en la provincia \
             en la época estival y a que no es una zona especialmente turística en esa época del año.')
-    st.markdown('## Tendendcias y comparación')
+    st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Córdoba. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De maera extra, se da la opción de comparar los datos de Córdoba con los de cualquier otra provincia andaluza a seleccionar. \
         Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en una rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \

@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 
 def app():
 
-    st.title('Covid-19 en Huelva😷')
+    st.title('Covid-19 en Sevilla😷')
     st.markdown('TEXTO.')
     st.markdown('## Tendencias y comparación')
     st.markdown('TEXTO')      
@@ -23,7 +23,7 @@ def app():
     Andalucia_df = scrapy_data()
 
     ## Datos de la comunidad    
-    Huelva =  Andalucia_df[Andalucia_df.Territorio == 'Huelva']
+    Sevilla =  Andalucia_df[Andalucia_df.Territorio == 'Sevilla']
     #Almería['Mes'] = [x.month for x in Almería.Fecha]
 #
     options = ("Nuevos casos", "Hospitalizados","UCI",'Fallecidos')
@@ -31,20 +31,20 @@ def app():
         "¿Qué datos quieres ver?",
         options
     )
-    options_province = ("No", "Almería","Cádiz", "Granada", "Córdoba", "Jaén", "Málaga", "Sevilla")
+    options_province = ("No", "Almería","Cádiz", "Granada", "Córdoba", "Jaén", "Málaga", "Huelva")
     select_data2 = st.sidebar.radio(
         "¿Quieres comparar los datos con otra provincia?",
         options_province
     )
     
-    time_line_plot(Andalucia_df, select_data1, 'Huelva' , select_data2)
+    time_line_plot(Andalucia_df, select_data1, 'Sevilla' , select_data2)
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\
-        para la provincia onubense.')
+        para la provincia sevillana.')
 
 
-    st.dataframe(Huelva.head(10).reset_index(drop=True))
+    st.dataframe(Sevilla.head(10).reset_index(drop=True))
 
     About1 = st.sidebar.markdown('## 🤝 Sobre nosotros')
 

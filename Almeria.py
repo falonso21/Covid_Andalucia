@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 from streamlit_echarts import st_pyecharts
 
+
 from covid_functions import *
 
 import plotly.graph_objects as go

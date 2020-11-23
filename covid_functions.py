@@ -471,6 +471,20 @@ def plot_timeline(df, data1 = 'Nuevos casos', data2 = 'Hospitalizados'):
         [description], by default 'Hospitalizados'
     """
     tl = Timeline()
+    calendar_dict = {
+        1:'Ene',
+        2:'Feb',
+        3:'Mar',
+        4:'Abr',
+        5:'May',
+        6:'Jun',
+        7:'Jul',
+        8:'Ag',
+        9:'Sep',
+        10:'Oct',
+        11:'Nov',
+        12:'Dic'
+    }
     for i in range(3, df.Mes.max()+1):
         bar = (
             Bar()
@@ -492,6 +506,6 @@ def plot_timeline(df, data1 = 'Nuevos casos', data2 = 'Hospitalizados'):
                 ],
             )
         )
-        tl.add(bar,i)
+        tl.add(bar,calendar_dict[i])
     st_pyecharts(tl)
    

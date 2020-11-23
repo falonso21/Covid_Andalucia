@@ -34,6 +34,13 @@ import datetime
 ########## DATA
 @st.cache
 def scrapy_data():
+    """Función encargada de extraer los datos por provincia y fecha de Covid.
+
+    Returns
+    -------
+    DataFrame
+        DataFrame con los datos históricos por fecha y por provincia.
+    """
 
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/39409"
     payload = {}
@@ -67,11 +74,56 @@ def scrapy_data():
 
     return Andalucia_df
 
+def json_to_df(url, lista_datos_acumulados):
+    """Función para extraer datos por municipio por provincia.
+    Esta función habrá que ejecutarla 8 veces (1 vez por provincia).
+
+    Parameters
+    ----------
+    url : string
+        _URL del json de cada provincia con los datos municipales.
+    lista_datos_acumulados : list
+        lista con los datos acumulados que salen en la tabla de la página de la junta.
+
+    Returns
+    -------
+    DataFrame
+        Dataframe con los datos de la provincia con los municipios como índice.
+    """
+    payload = {}
+    headers = {}
+    
+    data = []
+    response = requests.request("GET", url, headers=headers, data = payload,verify=False)
+    df = response.json()
+    
+    columnas = [x['des'] for x in df['measures']]
+    indice = [x[0]['des'] for x in df['data']]
+    
+    for i in range(len(df['data'])):
+        aux = [x['val'] for x in df['data'][i] if 'val' in x.keys()]
+        tup = tuple(aux)
+        data.append(tup)
+    data = pd.DataFrame(data,columns=columnas)
+    data['indice'] = indice
+    data = data[-data['indice'].isin(lista_datos_acumulados)].reset_index(drop=True)
+    data = data.set_index(['indice'])
+    return data.applymap(lambda x : float(x) if x!='' else np.nan)
+    return data
+
 
 ########## PLOTS 
 
 
 def plot_map(datos):
+    """[summary]
+
+    Parameters
+    ----------
+    datos : [type]
+        [description]
+    """
+
 
     with open('Andalucia_GeoJSON.geojson',encoding="utf-8") as f:
         geo = json.load(f, encoding="utf-8")
@@ -215,12 +267,18 @@ def plot_map(datos):
 
 
 def pyechart_comunidad_bar(df, data1, data2):
+    """Plot comparing those two charasteristics.
 
+    Parameters
+    ----------
+    df : DataFrame
+        [description]
+    data1 : Series
+        Column to plot between "nuevos casos", "hospitalizados", "UCI" y "fallecidos"
+    data2 : Series
+        Column to plot between "nuevos casos", "hospitalizados", "UCI" y "fallecidos"
     """
-    data1: a column to plot between "nuevos casos", "hospitalizados", "UCI" y "fallecidos"
-    data2: a column to plot between "nuevos casos", "hospitalizados", "UCI" y "fallecidos"
-    return: plot comparing those two charasteristics
-    """
+
 
     bar = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.ESSOS))
@@ -248,8 +306,12 @@ def pyechart_comunidad_bar(df, data1, data2):
 
 
 def calendar_plot(df):
+    """[summary]
 
-    """
+    Parameters
+    ----------
+    df : [type]
+        [description]
     """
 
     #begin = datetime.date(2020, 2, 9)
@@ -281,6 +343,13 @@ def calendar_plot(df):
 
 
 def plotly_stacked(df):
+    """[summary]
+
+    Parameters
+    ----------
+    df : [type]
+        [description]
+    """
 
     fig1 = px.bar(Provincias_acumulados, x="Territorio", y=["Nuevos casos", "Hospitalizados", "UCI", "Fallecidos"], title="Datos acumulados desde el inicio de la pandemia",\
         color_discrete_sequence=['#BE5A54', '#FF7733', '#FFA833', '#FFF367'])
@@ -289,6 +358,19 @@ def plotly_stacked(df):
 
 
 def time_line_plot(df, select_data, province1, province2):
+    """[summary]
+
+    Parameters
+    ----------
+    df : [type]
+        [description]
+    select_data : [type]
+        [description]
+    province1 : [type]
+        [description]
+    province2 : [type]
+        [description]
+    """
     df1 =df[df.Territorio == province1]
     if province2 == 'No':
         chart_title = 'Histórico de ' + select_data.lower() + ' en  ' + province1
@@ -377,6 +459,17 @@ def time_line_plot(df, select_data, province1, province2):
         st.plotly_chart(fig,height=210,width=500)
 
 def plot_timeline(df, data1 = 'Nuevos casos', data2 = 'Hospitalizados'):
+    """[summary]
+
+    Parameters
+    ----------
+    df : [type]
+        [description]
+    data1 : str, optional
+        [description], by default 'Nuevos casos'
+    data2 : str, optional
+        [description], by default 'Hospitalizados'
+    """
     tl = Timeline()
     for i in range(3, df.Mes.max()+1):
         bar = (

@@ -3,6 +3,11 @@ import Almeria
 import Cadiz
 import Cordoba
 import Granada
+import Huelva
+import Sevilla
+import Malaga
+import Jaen
+
 
 import streamlit as st
 PAGES = {
@@ -10,7 +15,11 @@ PAGES = {
     "Almería": Almeria,
     "Cádiz": Cadiz, 
     "Córdoba": Cordoba,
-    "Granada": Granada
+    "Granada": Granada,
+    'Huelva': Huelva,
+    'Sevilla': Sevilla,
+    'Jaén': Jaen,
+    'Málaga': Malaga
 }
 st.sidebar.title('Ir a')
 selection = st.sidebar.selectbox("Seleccione una provincia o la comunidad en general:", list(PAGES.keys()))

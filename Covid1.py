@@ -1,7 +1,7 @@
 ### Librerías necesarias
 import warnings
 warnings.filterwarnings("ignore")
-
+from datetime import timedelta
 import streamlit as st
 from streamlit_folium import folium_static
 from streamlit_echarts import st_pyecharts
@@ -57,11 +57,16 @@ def app():
     Comunidad1 = Comunidad.groupby(['Mes']).sum().reset_index()
 
     ## Nos quedamos con los datos de la fehca más reciente en el momento de ejecución
-    Andalucia_LastDate = Andalucia_df[Andalucia_df.Fecha == Andalucia_df.Fecha[0]]
-    Andalucia_LastDate = Andalucia_LastDate[Andalucia_LastDate.Territorio != 'Andalucía']
+    try:
 
+        Andalucia_LastDate = Andalucia_df[Andalucia_df.Fecha == Andalucia_df.Fecha.max()]
+        Andalucia_LastDate = Andalucia_LastDate[Andalucia_LastDate.Territorio != 'Andalucía']
+        plot_map(Andalucia_LastDate)
+    except IndexError:
+        Andalucia_LastDate = Andalucia_df[Andalucia_df.Fecha == (Andalucia_df.Fecha.max()-timedelta(1))]
+        Andalucia_LastDate = Andalucia_LastDate[Andalucia_LastDate.Territorio != 'Andalucía']
+        plot_map(Andalucia_LastDate)
 
-    plot_map(Andalucia_LastDate)
 
 
     options = ("Nuevos casos", "Hospitalizados","UCI",'Fallecidos')

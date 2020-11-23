@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 from streamlit_echarts import st_pyecharts
 
+
 from covid_functions import *
 
 import plotly.graph_objects as go
@@ -16,7 +17,7 @@ def app():
     st.markdown('La provincia almeriense se trata, según los datos proporcionados por la Junta de Andalucía, de la segunda menos damnificada por el coronavirus en Andalucía. \
         Únicamente Huelva presenta mejores datos. Es destacable que, junto con Málaga, fue la primera provincia andaluza en notar la segunda ola del virus. De hecho, esto \
         se puede ver en las gráficas comparativas ya que en septiembre Almería tiene un pico solo superado por la provincia malagueña.')         
-    st.markdown('## Tendendcias y comparación')
+    st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Almería. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De maera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar. \
         Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en una rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \

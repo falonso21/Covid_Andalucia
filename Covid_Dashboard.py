@@ -16,10 +16,10 @@ PAGES = {
     "Cádiz": Cadiz, 
     "Córdoba": Cordoba,
     "Granada": Granada,
-    'Huelva': Huelva,
-    'Sevilla': Sevilla,
-    'Jaén': Jaen,
-    'Málaga': Malaga
+    "Huelva": Huelva,
+    "Jaén": Jaen,
+    "Málaga": Malaga,
+    "Sevilla": Sevilla
 }
 st.sidebar.title('Ir a')
 selection = st.sidebar.selectbox("Seleccione una provincia o la comunidad en general:", list(PAGES.keys()))

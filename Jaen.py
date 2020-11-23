@@ -14,9 +14,14 @@ import plotly.graph_objects as go
 def app():
 
     st.title('Covid-19 en Jaén😷')
-    st.markdown('TEXTO.')
+    st.markdown('La provincia jienense se trata, según los datos proporcionados por la Junta de Andalucía, se presenta como la tercera menos daminificada de la comunidad. \
+        Solo Huelva y Almería presentan mejores datos absolutos en término de casos registrados. Pero no es oro todo lo que reluce, pues pese a no estar de las primeras en casos registrados presenta la tasa más alta \
+            de la comunidad en cuanto a fallecidos por contagiados.')
     st.markdown('## Tendencias y comparación')
-    st.markdown('TEXTO')      
+    st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Jaén. \
+        Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 
+    st.markdown('Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en un rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
+            hacer _zoom in_ y _zoom out_...')      
 
 
     ## Obtenemos los datos de hoy mediante una petición a la api

@@ -14,9 +14,13 @@ import plotly.graph_objects as go
 def app():
 
     st.title('Covid-19 en Sevilla😷')
-    st.markdown('TEXTO.')
+    st.markdown('La provincia hispalense es la que más ha acusado la pandemia a lo largo de todos estos meses. Se trata de la provincia con más casos y con mayor número de fallecidos. \
+        Lo cual no resulta inesperado por ser la capital y el centro neurálgico de la comunidad. ')
     st.markdown('## Tendencias y comparación')
-    st.markdown('TEXTO')      
+    st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Sevilla. \
+        Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 
+    st.markdown('Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en un rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
+            hacer _zoom in_ y _zoom out_...')     
 
 
     ## Obtenemos los datos de hoy mediante una petición a la api
@@ -41,7 +45,7 @@ def app():
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\
-        para la provincia sevillana.')
+        para la provincia hispalense.')
 
 
     st.dataframe(Sevilla.head(10).reset_index(drop=True))

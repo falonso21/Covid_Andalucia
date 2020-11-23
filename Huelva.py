@@ -14,9 +14,14 @@ import plotly.graph_objects as go
 def app():
 
     st.title('Covid-19 en Huelva😷')
-    st.markdown('TEXTO.')
+    st.markdown('La provincia onubense se trata, según los datos proporcionados por la Junta de Andalucía, de la provincia andaluza menos afectada por la pandemia. \
+        De hecho, no solo es la menos afectada dentro de la comunidad sino que presenta los mejores datos dentro de la Península. También resulta interesante que pese a ser un lugar de veraneo, \
+            no ha acusado la segunda ola tanto como otras zonas costeras.')
     st.markdown('## Tendencias y comparación')
-    st.markdown('TEXTO')      
+    st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Huelva. \
+        Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 
+    st.markdown('Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en un rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
+            hacer _zoom in_ y _zoom out_...')     
 
 
     ## Obtenemos los datos de hoy mediante una petición a la api

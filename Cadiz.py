@@ -13,13 +13,13 @@ import plotly.graph_objects as go
 def app():
 
     st.title('Covid-19 en Cádiz😷')
-    st.markdown('La provincia gaditana se trata, según los datos proporcionados por la Junta de Andalucía, de la tercera menos damnificada por el coronavirus en Andalucía. \
-        Únicamente Huelva y Almería presentan mejores datos abosulutos. Es remarcable que junto con la capital, Sevilla, y otras provincias costeras como Málaga o Almería, fue de las primeras \
-            en acusar la llegada de la segunda ola, lo cual puede deverse al turismo nacional que a consecuencia del Covid19 ha decidido veranear en las costas andaluzas.')         
+    st.markdown('La provincia gaditana se trata, según los datos proporcionados por la Junta de Andalucía, de la cuarta más damnificada por el coronavirus en Andalucía. \
+        Únicamente Sevilla, Granada y Málaga presentan peores datos absolutos. Es remarcable que junto con la capital, Sevilla, y otras provincias costeras como Málaga o Almería, fue de las primeras \
+            en acusar la llegada de la segunda ola. Esto puede deberse al turismo nacional que a consecuencia del Covid19 ha decidido veranear en las costas andaluzas.')         
     st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Cádiz. \
-        Se añade también una línea que representa la media para dicho dato seleccionado. De maera extra, se da la opción de comparar los datos de Cádiz con los de cualquier otra provincia andaluza a seleccionar. \
-        Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en una rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
+        Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 
+    st.markdown('Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en un rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
             hacer _zoom in_ y _zoom out_...')      
 
 

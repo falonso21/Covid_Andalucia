@@ -13,10 +13,14 @@ import plotly.graph_objects as go
 def app():
 
     st.title('Covid-19 en Málaga😷')
-    st.markdown('TEXTO.')
+    st.markdown('La provincia malagueña se trata, según los datos proporcionados por la Junta de Andalucía, se presenta como la tercera más daminificada de la comunidad. \
+        Solo Sevilla y Granada presentan peores datos absolutos en término de casos registrados. Se trata además de la provincia que más acusó la llegada de la segunda ola en septiembre, incluso por delante de Sevilla. \
+            Aunque parece que en los dos últimos meses han conseguido estabilizar su situación.')
     st.markdown('## Tendencias y comparación')
-    st.markdown('TEXTO')      
-
+    st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Málaga. \
+        Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 
+    st.markdown('Por último, añadir que el gráfico es interactivo por lo que permite: el estudio de tendencias en un rango temporal más o menos prolongado, obtener el para un momento puntual arrastrando el ratón sobre la gráfica, \
+            hacer _zoom in_ y _zoom out_...')      
 
     ## Obtenemos los datos de hoy mediante una petición a la api
     Andalucia_df = scrapy_data()

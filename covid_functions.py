@@ -116,7 +116,7 @@ def json_to_df(url, lista_datos_acumulados):
 
 
 def plot_map(datos):
-    """[summary]
+    """Función que pinta el mapa en streaming
 
     Parameters
     ----------

@@ -32,7 +32,7 @@ from pyecharts.options import ComponentTitleOpts
 import datetime
 
 ########## DATA
-@st.cache
+#@st.cache
 def scrapy_data():
     """Función encargada de extraer los datos por provincia y fecha de Covid.
 

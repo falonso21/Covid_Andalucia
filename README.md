@@ -1,4 +1,4 @@
-# Covid_Andalucia
+# Covid_Andalucia [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/falonso21/covid_andalucia/main/Covid_Dashboard.py)
 Dashboard sobre la situación de la pandemia en Andalucía.
 
 Este Dashboard ha sido creado mediante la librería Streamlit. Además se hace uso de Plotly para las gráficas y de Folium para la elaboración del visor cartográfico.

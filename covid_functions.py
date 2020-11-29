@@ -125,7 +125,7 @@ def plot_map(datos):
     """
 
 
-    with open('Andalucia_GeoJSON.geojson',encoding="utf-8") as f:
+    with open('Geojson/Andalucia_GeoJSON.geojson',encoding="utf-8") as f:
         geo = json.load(f, encoding="utf-8")
 
     ## Se corrige un pequeño fallo con la tilde de Almería

@@ -1,12 +1,12 @@
 import Covid1
-import Almeria
-import Cadiz
-import Cordoba
-import Granada
-import Huelva
-import Sevilla
-import Malaga
-import Jaen
+import Provincias.Almeria
+import Provincias.Cadiz
+import Provincias.Cordoba
+import Provincias.Granada
+import Provincias.Huelva
+import Provincias.Sevilla
+import Provincias.Malaga
+import Provincias.Jaen
 
 
 import streamlit as st

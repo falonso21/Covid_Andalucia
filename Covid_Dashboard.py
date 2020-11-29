@@ -1,12 +1,12 @@
 import Covid1
-import Provincias.Almeria
-import Provincias.Cadiz
-import Provincias.Cordoba
-import Provincias.Granada
-import Provincias.Huelva
-import Provincias.Sevilla
-import Provincias.Malaga
-import Provincias.Jaen
+import Provincias.Almeria as Almeria
+import Provincias.Cadiz as Cadiz
+import Provincias.Cordoba as Cordoba
+import Provincias.Granada as Granada
+import Provincias.Huelva as Huelva
+import Provincias.Sevilla as Sevilla
+import Provincias.Malaga as Malaga
+import Provincias.Jaen as Jaen
 
 
 import streamlit as st

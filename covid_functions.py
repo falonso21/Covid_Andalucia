@@ -62,9 +62,9 @@ def scrapy_data():
         fecha += [my_data['data'][index][0]['des']]
         territorio += [my_data['data'][index][1]['des']]
         confirmados_pdia += [my_data['data'][index][3]['format']]
-        hospitalizados += [my_data['data'][index][5]['format']]
-        uci += [my_data['data'][index][6]['format']]
-        fallecidos += [my_data['data'][index][7]['format']]
+        hospitalizados += [my_data['data'][index][4]['format']]
+        uci += [my_data['data'][index][5]['format']]
+        fallecidos += [my_data['data'][index][6]['format']]
         
     Andalucia_df = pd.DataFrame({'Fecha':fecha,'Territorio':territorio, 'Nuevos casos':confirmados_pdia,\
                 'Hospitalizados':hospitalizados,'UCI':uci, 'Fallecidos':fallecidos})
@@ -113,6 +113,63 @@ def json_to_df(url, lista_datos_acumulados):
 
 
 ########## PLOTS 
+def plot_province_map(province,data,zoom1,zoom2,zoom3):
+
+    ## Limpieza de la tabla
+    data.reset_index(inplace=True)
+    data['indice2'] = [re.sub(r'(.*) \((.*)\)',r'\2 \1',x) if '(' in x else x for x in data['indice']]
+    data['indice2'] = [re.sub(r'capital (.*)',r'\1',x) if 'capital' in x else x for x in data['indice2']]
+
+
+    with open('Geojson/'+province+'.geojson',encoding="utf-8") as f:
+        geo = json.load(f, encoding="utf-8")
+
+    for x in range(len(geo['features'])):
+        try:
+            geo['features'][x]['properties']['Total_confirmados'] = data[data.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Total confirmados'].tolist()[0]
+            geo['features'][x]['properties']['Curados'] = data[data.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Curados'].tolist()[0]
+            geo['features'][x]['properties']['Fallecidos'] = data[data.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Fallecidos'].tolist()[0]
+        except:
+            pass
+    m = folium.Map(location=[zoom1, zoom2], zoom_start=zoom3)
+
+    ## Mediante folium realizamos el mapa
+
+    cloropeth = folium.Choropleth(
+        geo_data=geo,
+        name='choropleth',
+        data=data,
+        columns=['indice2','Total confirmados'],
+        key_on='feature.properties.NAMEUNIT',
+        fill_color='YlOrRd',
+        fill_opacity=0.7,
+        line_opacity=0.2).add_to(m)
+
+    # add labels indicating the name of the community
+    style_function = lambda x: {'fillColor': '#ffffff', 
+                                'color':'#000000', 
+                                'fillOpacity': 0.1, 
+                                'weight': 0.1}
+    highlight_function = lambda x: {'fillColor': '#000000', 
+                                    'color':'#000000', 
+                                    'fillOpacity': 0.50, 
+                                    'weight': 0.1}
+
+    NIL = folium.features.GeoJson(
+        geo,
+        style_function=style_function, 
+        control=False,
+        highlight_function=highlight_function, 
+        tooltip=folium.features.GeoJsonTooltip(
+            fields=['NAMEUNIT','Total_confirmados','Curados','Fallecidos'],
+            aliases=['Municipio','Confirmados totales','Curados','Fallecidos'],
+            style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
+        )
+    )
+    m.add_child(NIL)
+    m.keep_in_front(NIL)
+    folium.LayerControl().add_to(m)
+    folium_static(m)
 
 
 def plot_map(datos):

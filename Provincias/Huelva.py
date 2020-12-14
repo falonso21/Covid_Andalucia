@@ -17,6 +17,13 @@ def app():
     st.markdown('La provincia onubense se trata, según los datos proporcionados por la Junta de Andalucía, de la provincia andaluza menos afectada por la pandemia. \
         De hecho, no solo es la menos afectada dentro de la comunidad sino que presenta los mejores datos dentro de la Península. También resulta interesante que pese a ser un lugar de veraneo, \
             no ha acusado la segunda ola tanto como otras zonas costeras.')
+    st.markdown('## Mapa de los municipios')
+
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38668"
+    lista_acumulados = ['Huelva','Sierra de Huelva-Andévalo Central','Condado-Campiña','Huelva-Costa']
+    huelva_df = json_to_df(url,lista_acumulados)
+    huelva_df = huelva_df.fillna(0)
+    plot_province_map('Huelva', huelva_df, 37.5, -6.8, 8)   
     st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Huelva. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 

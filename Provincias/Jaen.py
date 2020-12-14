@@ -17,6 +17,13 @@ def app():
     st.markdown('La provincia jienense se trata, según los datos proporcionados por la Junta de Andalucía, se presenta como la tercera menos daminificada de la comunidad. \
         Solo Huelva y Almería presentan mejores datos absolutos en término de casos registrados. Pero no es oro todo lo que reluce, pues pese a no estar de las primeras en casos registrados presenta la tasa más alta \
             de la comunidad en cuanto a fallecidos por contagiados.')
+    st.markdown('## Mapa de los municipios')
+
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38669"
+    lista_acumulados = ['Jaén','Jaén Sur','Jaén (distrito)','Jaén Norte','Jaén Nordeste']
+    jaen_df = json_to_df(url,lista_acumulados)
+    jaen_df = jaen_df.fillna(0)
+    plot_province_map('Jaén', jaen_df, 37.7, -3.8, 8)  
     st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Jaén. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 

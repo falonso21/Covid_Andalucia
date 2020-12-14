@@ -62,9 +62,9 @@ def scrapy_data():
         fecha += [my_data['data'][index][0]['des']]
         territorio += [my_data['data'][index][1]['des']]
         confirmados_pdia += [my_data['data'][index][3]['format']]
-        hospitalizados += [my_data['data'][index][5]['format']]
-        uci += [my_data['data'][index][6]['format']]
-        fallecidos += [my_data['data'][index][7]['format']]
+        hospitalizados += [my_data['data'][index][4]['format']]
+        uci += [my_data['data'][index][5]['format']]
+        fallecidos += [my_data['data'][index][6]['format']]
         
     Andalucia_df = pd.DataFrame({'Fecha':fecha,'Territorio':territorio, 'Nuevos casos':confirmados_pdia,\
                 'Hospitalizados':hospitalizados,'UCI':uci, 'Fallecidos':fallecidos})

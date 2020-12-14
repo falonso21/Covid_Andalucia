@@ -16,8 +16,7 @@ def app():
     st.markdown('La provincia granadina se trata, según los datos proporcionados por la Junta de Andalucía, de la segunda más damnificada por el coronavirus en Andalucía, solo por detrás de la capital Sevilla. \
         De hecho, a lo largo de los meses ha presentado datos muy similares a Sevilla, con la diferencia de que la capital acusó antes la llegada de la segunda ola. También resulta curioso que \
             Málaga superaba en casos a Granada durante la primera etapa de la pandemia, pero en esta segunda ola la provincia de la Costa del Sol parece haberse estabilizado.')
-    st.markdown('## Mapa de los municipios')
-
+    st.markdown('## Mapa de los municipios con datos acumulados')
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38667"
     lista_acumulados = ['Granada','Granada Sur','Granada (distrito)','Metropolitano de Granada','Granada Nordeste']
     granada_df = json_to_df(url,lista_acumulados)

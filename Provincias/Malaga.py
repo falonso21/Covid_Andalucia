@@ -16,6 +16,12 @@ def app():
     st.markdown('La provincia malagueña se trata, según los datos proporcionados por la Junta de Andalucía, se presenta como la tercera más daminificada de la comunidad. \
         Solo Sevilla y Granada presentan peores datos absolutos en término de casos registrados. Se trata además de la provincia que más acusó la llegada de la segunda ola en septiembre, incluso por delante de Sevilla. \
             Aunque parece que en los dos últimos meses han conseguido estabilizar su situación.')
+    st.markdown('## Mapa de los municipios con datos acumulados')
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38674"
+    lista_acumulados = ['Málaga','Axarquía','Málaga (distrito)','Costa del Sol','La Vega','Serranía','Valle del Guadalhorce']
+    malaga_df = json_to_df(url,lista_acumulados)
+    malaga_df = malaga_df.fillna(0)
+    plot_province_map('Málaga', malaga_df, 36.7, -4.1, 8)   
     st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Málaga. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 

@@ -17,7 +17,7 @@ def app():
     st.markdown('La provincia almeriense se trata, según los datos proporcionados por la Junta de Andalucía, de la segunda menos damnificada por el coronavirus en Andalucía. \
         Únicamente Huelva presenta mejores datos. Es destacable que, junto con Málaga, fue la primera provincia andaluza en notar la segunda ola del virus. De hecho, esto \
         se puede ver en las gráficas comparativas ya que en septiembre Almería presenta un pico solo superado por la provincia malagueña.')         
-    st.markdown('## Mapa de los municipios')
+    st.markdown('## Mapa de los municipios con datos acumulados')
 
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38665"
     lista_acumulados = ['Almería','Almería (distrito)','Levante-Alto Almanzora','Poniente de Almería']

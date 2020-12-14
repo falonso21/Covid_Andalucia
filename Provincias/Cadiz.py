@@ -16,7 +16,7 @@ def app():
     st.markdown('La provincia gaditana se trata, según los datos proporcionados por la Junta de Andalucía, de la cuarta más damnificada por el coronavirus en Andalucía. \
         Únicamente Sevilla, Granada y Málaga presentan peores datos absolutos. Es remarcable que junto con la capital, Sevilla, y otras provincias costeras como Málaga o Almería, fue de las primeras \
             en acusar la llegada de la segunda ola. Esto puede deberse al turismo nacional que a consecuencia del Covid19 ha decidido veranear en las costas andaluzas.')         
-    st.markdown('## Mapa de los municipios')
+    st.markdown('## Mapa de los municipios con datos acumulados')
 
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38637"
     lista_acumulados = ['Cádiz','Campo de Gibraltar','Bahía de Cádiz-La Janda','Jerez-Costa Noroeste','Sierra de Cádiz']

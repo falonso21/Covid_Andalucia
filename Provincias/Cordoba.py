@@ -17,7 +17,7 @@ def app():
     st.markdown('La provincia cordobesa se trata, según los datos proporcionados por la Junta de Andalucía, de la cuarta más damnificada por el coronavirus en Andalucía. \
         Únicamente superada por Sevilla, Málaga y Granada. Resulta curiosa la escasez de datos y la baja incidencia en verano, siendo una de las provincias menos afectadas esos meses. Esto puede ser debido a las altas temperaturas alcanzadas en la provincia \
             en la época estival, además de que no es una zona especialmente turística en esa época del año.')
-    st.markdown('## Mapa de los municipios')
+    st.markdown('## Mapa de los municipios con datos acumulados')
 
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38666"
     lista_acumulados = ['Córdoba','Córdoba (distrito)','Córdoba Sur','Guadalquivir','Córdoba Norte']

@@ -16,6 +16,12 @@ def app():
     st.title('Covid-19 en Sevilla😷')
     st.markdown('La provincia hispalense es la que más ha acusado la pandemia a lo largo de todos estos meses. Se trata de la provincia con más casos y con mayor número de fallecidos. \
         Lo cual no resulta inesperado por ser la capital y el centro neurálgico de la comunidad. ')
+    st.markdown('## Mapa de los municipios con datos acumulados')
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38676"
+    lista_acumulados = ['Sevilla','Aljarafe','Sevilla (distrito)','Sevilla Este','Sevilla Norte','Sevilla Norte']
+    sevilla_df = json_to_df(url,lista_acumulados)
+    sevilla_df = sevilla_df.fillna(0)
+    plot_province_map('Sevilla', sevilla_df, 37.4, -6, 8) 
     st.markdown('## Tendencias y comparación')
     st.markdown('En la siguiente gráfica se muestra la evolución de los diferentes datos para la provincia de Sevilla. \
         Se añade también una línea que representa la media para dicho dato seleccionado. De manera extra, se da la opción de comparar los datos de Almería con los de cualquier otra provincia andaluza a seleccionar.') 

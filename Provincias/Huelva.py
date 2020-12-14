@@ -17,7 +17,7 @@ def app():
     st.markdown('La provincia onubense se trata, según los datos proporcionados por la Junta de Andalucía, de la provincia andaluza menos afectada por la pandemia. \
         De hecho, no solo es la menos afectada dentro de la comunidad sino que presenta los mejores datos dentro de la Península. También resulta interesante que pese a ser un lugar de veraneo, \
             no ha acusado la segunda ola tanto como otras zonas costeras.')
-    st.markdown('## Mapa de los municipios')
+    st.markdown('## Mapa de los municipios con datos acumulados')
 
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38668"
     lista_acumulados = ['Huelva','Sierra de Huelva-Andévalo Central','Condado-Campiña','Huelva-Costa']

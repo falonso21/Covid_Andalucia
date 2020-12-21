@@ -50,6 +50,7 @@ def app():
     )
     
     time_line_plot(Andalucia_df, select_data1, 'Cádiz' , select_data2)
+    violin_chart(Andalucia_df, select_data1, 'Cádiz' , select_data2)
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\

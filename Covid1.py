@@ -67,8 +67,8 @@ def app():
         Andalucia_LastDate = Andalucia_LastDate[Andalucia_LastDate.Territorio != 'Andalucía']
         plot_map(Andalucia_LastDate)
 
-    st.markdown('En el visor de a continuación disponemos de la información a nivel municipal. Es importante mencionar que la Junta de Andalucía, \
-        provee los datos diarios solamente a nivel provincial. Por lo tanto los datos que vemos reflejados en el siguiente mapa son los valores acumulados \
+    st.markdown('En este segundo visor disponemos de la información a nivel municipal. Es importante mencionar que la Junta de Andalucía \
+        provee los datos diarios solamente a nivel provincial. Por tanto los datos que vemos reflejados en el siguiente mapa son los valores acumulados \
             desde el inicio de la pandemia.')
     ## Mapa con datos municipales
     towns_plot()

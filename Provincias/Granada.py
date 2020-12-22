@@ -17,6 +17,8 @@ def app():
         De hecho, a lo largo de los meses ha presentado datos muy similares a Sevilla, con la diferencia de que la capital acusó antes la llegada de la segunda ola. También resulta curioso que \
             Málaga superaba en casos a Granada durante la primera etapa de la pandemia, pero en esta segunda ola la provincia de la Costa del Sol parece haberse estabilizado.')
     st.markdown('## Mapa de los municipios con datos acumulados')
+    st.markdown('En el siguiente mapa vemos los datos de la provincia de Granada a nivel municipal que provee la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/informe/anual?CodOper=b3_2314&idNode=42348).\
+         Es importante recalcar que estos son datos acumulados desde el inicio de la pandemia.')
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38667"
     lista_acumulados = ['Granada','Granada Sur','Granada (distrito)','Metropolitano de Granada','Granada Nordeste']
     granada_df = json_to_df(url,lista_acumulados)
@@ -48,6 +50,10 @@ def app():
     )
     
     time_line_plot(Andalucia_df, select_data1, 'Granada' , select_data2)
+    st.markdown('En adición a ello, podemos ver a continuación un [gráfico de violín](https://en.wikipedia.org/wiki/Violin_plot#:~:text=A%20violin%20plot%20is%20a,by%20a%20kernel%20density%20estimator.). \
+    En este gráfico al igual que antes podemos comparar un tipo de dato entre dos provincias. Su utilidad reside en que de un solo vistazo podemos hacernos una idea tanto de la distribución como de los estadísticos básicos. \
+        Además, se trata de nuevo de un gráfico interactivo que permite obtener información arrastrando el ratón por los diferentes elementos del mismo.')
+    violin_chart(Andalucia_df, select_data1, 'Granada' , select_data2)
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\

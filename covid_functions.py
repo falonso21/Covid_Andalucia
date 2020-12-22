@@ -404,7 +404,8 @@ def towns_plot():
         key_on='feature.properties.NAMEUNIT',
         fill_color='YlOrRd',
         fill_opacity=0.7,
-        line_opacity=0.2).add_to(m)
+        line_opacity=0.2,
+        legend_name ='Created by: Francisco Alonso').add_to(m)
 
     # add labels indicating the name of the community
     style_function = lambda x: {'fillColor': '#ffffff', 

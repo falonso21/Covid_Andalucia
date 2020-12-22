@@ -321,7 +321,117 @@ def plot_map(datos):
     folium_static(m)
 
 
+def towns_plot():
 
+    # Almería
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38665"
+    lista_acumulados = ['Almería','Almería (distrito)','Levante-Alto Almanzora','Poniente de Almería']
+    almeria_df = json_to_df(url,lista_acumulados)
+    almeria_df = almeria_df.fillna(0)
+    
+    # Cádiz
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38637"
+    lista_acumulados = ['Cádiz','Campo de Gibraltar','Bahía de Cádiz-La Janda','Jerez-Costa Noroeste','Sierra de Cádiz']
+    cadiz_df = json_to_df(url,lista_acumulados)
+    cadiz_df = cadiz_df.fillna(0)
+
+    # Córdoba
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38666"
+    lista_acumulados = ['Córdoba','Córdoba (distrito)','Córdoba Sur','Guadalquivir','Córdoba Norte']
+    cordoba_df = json_to_df(url,lista_acumulados)
+    cordoba_df = cordoba_df.fillna(0)
+
+    # Granada
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38667"
+    lista_acumulados = ['Granada','Granada Sur','Granada (distrito)','Metropolitano de Granada','Granada Nordeste']
+    granada_df = json_to_df(url,lista_acumulados)
+    granada_df = granada_df.fillna(0)
+
+    # Huelva 
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38668"
+    lista_acumulados = ['Huelva','Sierra de Huelva-Andévalo Central','Condado-Campiña','Huelva-Costa']
+    huelva_df = json_to_df(url,lista_acumulados)
+    huelva_df = huelva_df.fillna(0)
+
+    # Jaen
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38669"
+    lista_acumulados = ['Jaén','Jaén Sur','Jaén (distrito)','Jaén Norte','Jaén Nordeste']
+    jaen_df = json_to_df(url,lista_acumulados)
+    jaen_df = jaen_df.fillna(0)
+
+    # Málaga
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38674"
+    lista_acumulados = ['Málaga','Axarquía','Málaga (distrito)','Costa del Sol','La Vega','Serranía','Valle del Guadalhorce']
+    malaga_df = json_to_df(url,lista_acumulados)
+    malaga_df = malaga_df.fillna(0)
+
+    # Sevilla
+    url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38676"
+    lista_acumulados = ['Sevilla','Aljarafe','Sevilla (distrito)','Sevilla Este','Sevilla Norte','Sevilla Norte']
+    sevilla_df = json_to_df(url,lista_acumulados)
+    sevilla_df = sevilla_df.fillna(0)
+
+    # Concatenando todos
+    frames = [almeria_df, cadiz_df, cordoba_df, granada_df, huelva_df, jaen_df, malaga_df, sevilla_df]
+    Andalucia_municipios = pd.concat(frames)
+
+
+    ## Limpieza de la tabla
+    Andalucia_municipios.reset_index(inplace=True)
+    Andalucia_municipios['indice2'] = [re.sub(r'(.*) \((.*)\)',r'\2 \1',x) if '(' in x else x for x in Andalucia_municipios['indice']]
+    Andalucia_municipios['indice2'] = [re.sub(r'capital (.*)',r'\1',x) if 'capital' in x else x for x in Andalucia_municipios['indice2']]
+
+
+    with open('Geojson/Andalucia_municipios.geojson',encoding="utf-8") as f:
+        geo = json.load(f, encoding="utf-8")
+
+    for x in range(len(geo['features'])):
+        try:
+            geo['features'][x]['properties']['Total_confirmados'] = Andalucia_municipios[Andalucia_municipios.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Total confirmados'].tolist()[0]
+            geo['features'][x]['properties']['Curados'] = Andalucia_municipios[Andalucia_municipios.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Curados'].tolist()[0]
+            geo['features'][x]['properties']['Fallecidos'] = Andalucia_municipios[Andalucia_municipios.indice2 == geo['features'][x]['properties']['NAMEUNIT']]['Fallecidos'].tolist()[0]
+        except:
+            pass
+    m = folium.Map(location=[37, -4.8], zoom_start=6.5)
+
+    ## Mediante folium realizamos el mapa
+
+    cloropeth = folium.Choropleth(
+        geo_data=geo,
+        name='choropleth',
+        data=Andalucia_municipios,
+        columns=['indice2','Total confirmados'],
+        key_on='feature.properties.NAMEUNIT',
+        fill_color='YlOrRd',
+        fill_opacity=0.7,
+        line_opacity=0.2,
+        legend_name ='Created by: Francisco Alonso').add_to(m)
+
+    # add labels indicating the name of the community
+    style_function = lambda x: {'fillColor': '#ffffff', 
+                                'color':'#000000', 
+                                'fillOpacity': 0.1, 
+                                'weight': 0.1}
+    highlight_function = lambda x: {'fillColor': '#000000', 
+                                    'color':'#000000', 
+                                    'fillOpacity': 0.50, 
+                                    'weight': 0.1}
+
+    NIL = folium.features.GeoJson(
+        geo,
+        style_function=style_function, 
+        control=False,
+        highlight_function=highlight_function, 
+        tooltip=folium.features.GeoJsonTooltip(
+            fields=['NAMEUNIT','Total_confirmados','Curados','Fallecidos'],
+            aliases=['Municipio','Confirmados totales','Curados','Fallecidos'],
+            style=("background-color: white; color: #333333; font-family: arial; font-size: 12px; padding: 10px;") 
+        )
+    )
+    m.add_child(NIL)
+    m.keep_in_front(NIL)
+    folium.LayerControl().add_to(m)
+    folium_static(m)
 
 def pyechart_comunidad_bar(df, data1, data2):
     """Plot comparing those two charasteristics.
@@ -514,6 +624,23 @@ def time_line_plot(df, select_data, province1, province2):
         #col2.subheader("Últimos datos")
         #col2.dataframe(Aux.head(10).reset_index(drop=True))
         st.plotly_chart(fig,height=210,width=500)
+    
+def violin_chart(df, select_data, province1, province2):
+    df1 =df[df.Territorio == province1]
+    if province2 == 'No':
+        fig = px.violin(df1, y=select_data, box=True, # draw box plot inside the violin
+                points='all', # can be 'outliers', or False
+                )
+        st.plotly_chart(fig,height=110,width=300)
+    else:
+        df2 =df[df.Territorio == province2]
+        data = pd.concat([df1,df2])
+        fig = px.violin(data, color='Territorio', y=select_data, box=True, # draw box plot inside the violin
+            points='all', # can be 'outliers', or False
+            )
+        st.plotly_chart(fig,height=110,width=300)
+
+
 
 def plot_timeline(df, data1 = 'Nuevos casos', data2 = 'Hospitalizados'):
     """[summary]

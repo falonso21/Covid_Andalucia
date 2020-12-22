@@ -34,7 +34,7 @@ def app():
 
 
     st.title('Covid-19 en Andalucía😷')
-    st.markdown('## Visor cartográfico')
+    st.markdown('## Visores cartográficos')
     st.markdown('A continuación se presenta un visor cartográfico con los datos más recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\
         para cada provincia. Haciendo click en los marcadores podremos ver información acerca de nuevos casos, hospitalizaciones, ingresadosen UCI y fallecidos.')
@@ -67,7 +67,11 @@ def app():
         Andalucia_LastDate = Andalucia_LastDate[Andalucia_LastDate.Territorio != 'Andalucía']
         plot_map(Andalucia_LastDate)
 
-
+    st.markdown('En este segundo visor disponemos de la información a nivel municipal. Es importante mencionar que la Junta de Andalucía \
+        provee los datos diarios solamente a nivel provincial. Por tanto los datos que vemos reflejados en el siguiente mapa son los valores acumulados \
+            desde el inicio de la pandemia.')
+    ## Mapa con datos municipales
+    towns_plot()
 
     options = ("Nuevos casos", "Hospitalizados","UCI",'Fallecidos')
     select_data1 = st.sidebar.radio(
@@ -136,5 +140,3 @@ def app():
 
     Contact1 = st.sidebar.info('[Francisco Alonso Fernández](https://www.linkedin.com/in/franciscoalonsofernandez/) Data Scientist en [Future Space](https://www.futurespace.es/).')
     Contact2 = st.sidebar.info('[Javier Ángel Fernández](https://www.linkedin.com/in/javier-angel-fernandez/) Data Scientist en [IIC](https://www.iic.uam.es/).')
-
-

@@ -18,7 +18,9 @@ def app():
         De hecho, no solo es la menos afectada dentro de la comunidad sino que presenta los mejores datos dentro de la Península. También resulta interesante que pese a ser un lugar de veraneo, \
             no ha acusado la segunda ola tanto como otras zonas costeras.')
     st.markdown('## Mapa de los municipios con datos acumulados')
-
+    st.markdown('En el siguiente mapa vemos los datos de la provincia de Huelva a nivel municipal que provee la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/informe/anual?CodOper=b3_2314&idNode=42348).\
+         Es importante recalcar que estos son datos acumulados desde el inicio de la pandemia.')
+    st.markdown('Nota: La distribución de municipios por provincia en el mapa sanitario de Andalucía no coincide exactamente con la delimitación territorial administrativa. En el caso de Huelva, hay seis municipios que se encuentran asignados a distritos sanitarios de Sevilla (Arroyomolinos de León, Cala, Chucena, Hinojos, Santa Olalla de Cala y Zufre).')
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38668"
     lista_acumulados = ['Huelva','Sierra de Huelva-Andévalo Central','Condado-Campiña','Huelva-Costa']
     huelva_df = json_to_df(url,lista_acumulados)
@@ -50,6 +52,10 @@ def app():
     )
     
     time_line_plot(Andalucia_df, select_data1, 'Huelva' , select_data2)
+    st.markdown('En adición a ello, podemos ver a continuación un [gráfico de violín](https://en.wikipedia.org/wiki/Violin_plot#:~:text=A%20violin%20plot%20is%20a,by%20a%20kernel%20density%20estimator.). \
+    En este gráfico al igual que antes podemos comparar un tipo de dato entre dos provincias. Su utilidad reside en que de un solo vistazo podemos hacernos una idea tanto de la distribución como de los estadísticos básicos. \
+        Además, se trata de nuevo de un gráfico interactivo que permite obtener información arrastrando el ratón por los diferentes elementos del mismo.')
+    violin_chart(Andalucia_df, select_data1, 'Huelva' , select_data2)
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\

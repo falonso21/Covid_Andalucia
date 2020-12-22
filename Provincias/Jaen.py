@@ -18,7 +18,8 @@ def app():
         Solo Huelva y Almería presentan mejores datos absolutos en término de casos registrados. Pero no es oro todo lo que reluce, pues pese a no estar de las primeras en casos registrados presenta la tasa más alta \
             de la comunidad en cuanto a fallecidos por contagiados.')
     st.markdown('## Mapa de los municipios con datos acumulados')
-
+    st.markdown('En el siguiente mapa vemos los datos de la provincia de Jaén a nivel municipal que provee la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/informe/anual?CodOper=b3_2314&idNode=42348).\
+         Es importante recalcar que estos son datos acumulados desde el inicio de la pandemia.')
     url = "https://www.juntadeandalucia.es/institutodeestadisticaycartografia/intranet/admin/rest/v1.0/consulta/38669"
     lista_acumulados = ['Jaén','Jaén Sur','Jaén (distrito)','Jaén Norte','Jaén Nordeste']
     jaen_df = json_to_df(url,lista_acumulados)
@@ -50,6 +51,10 @@ def app():
     )
     
     time_line_plot(Andalucia_df, select_data1, 'Jaén' , select_data2)
+    st.markdown('En adición a ello, podemos ver a continuación un [gráfico de violín](https://en.wikipedia.org/wiki/Violin_plot#:~:text=A%20violin%20plot%20is%20a,by%20a%20kernel%20density%20estimator.). \
+    En este gráfico al igual que antes podemos comparar un tipo de dato entre dos provincias. Su utilidad reside en que de un solo vistazo podemos hacernos una idea tanto de la distribución como de los estadísticos básicos. \
+        Además, se trata de nuevo de un gráfico interactivo que permite obtener información arrastrando el ratón por los diferentes elementos del mismo.')
+    violin_chart(Andalucia_df, select_data1, 'Jaén' , select_data2)
     st.markdown('## Últimos datos de la provincia')
     st.markdown('A continuación se presenta una tabla con los datos de los diez días mas recientes,\
         publicados por la [Junta de Andalucía](https://www.juntadeandalucia.es/institutodeestadisticaycartografia/badea/operaciones/consulta/anual/39409?CodOper=b3_2314&codConsulta=39409),\
